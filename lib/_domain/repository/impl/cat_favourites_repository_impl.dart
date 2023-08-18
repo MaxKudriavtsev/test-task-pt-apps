@@ -18,8 +18,10 @@ class CatFavouritesRepositoryImpl implements CatFavouritesRepository {
   }
 
   @override
-  Future<void> addToFavorites(String imageId, {String? subId}) {
-    return _catFavouritesDataSource.addToFavorites(imageId);
+  Future<void> addToFavorites(
+      {required String imageId, required String subId}) {
+    return _catFavouritesDataSource.addToFavorites(
+        imageId: imageId, subId: subId);
   }
 
   @override

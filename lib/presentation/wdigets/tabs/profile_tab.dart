@@ -32,7 +32,6 @@ class ProfileTab extends StatelessWidget {
             if (state is ProfileError) {}
           },
           builder: (context, state) {
-            context.read<ProfileBloc>();
             if (state is ProfileLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is ProfileLoaded) {

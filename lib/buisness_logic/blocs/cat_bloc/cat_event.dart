@@ -27,3 +27,8 @@ class LoadFavouritesEvent extends CatEvent {
 
   LoadFavouritesEvent({required this.subId});
 }
+
+class UpdateSubId extends CatEvent {
+  final String subId;
+  UpdateSubId({required this.subId});
+}

@@ -14,7 +14,6 @@ class CatsTab extends StatefulWidget {
 class _CatsTabState extends State<CatsTab> {
   final ScrollController _scrollController = ScrollController();
   @override
-  @override
   void initState() {
     super.initState();
     context.read<CatBloc>().add(
@@ -99,7 +98,8 @@ class _CatsTabState extends State<CatsTab> {
                                 .id;
                             context.read<CatBloc>().add(
                                   RemoveFromFavouritesEvent(
-                                      favouriteId: favouriteId),
+                                    favouriteId: favouriteId,
+                                  ),
                                 );
                           } else {
                             context.read<CatBloc>().add(

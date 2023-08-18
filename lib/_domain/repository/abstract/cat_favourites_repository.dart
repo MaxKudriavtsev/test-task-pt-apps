@@ -9,6 +9,6 @@ abstract class CatFavouritesRepository {
     required String subId,
     int limit = 20,
   });
-  Future<void> addToFavorites(String imageId, {String? subId});
+  Future<void> addToFavorites({required String imageId, required String subId});
   Future<void> removeFromFavorites(int favouriteId);
 }

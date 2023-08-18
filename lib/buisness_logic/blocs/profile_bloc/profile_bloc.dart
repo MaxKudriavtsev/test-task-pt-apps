@@ -24,4 +24,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       _authenticationBloc.add(LoggedOut());
     });
   }
+
+  @override
+  Future<void> close() {
+    return super.close();
+  }
 }

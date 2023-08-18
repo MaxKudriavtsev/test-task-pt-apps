@@ -9,7 +9,7 @@ class CatBloc extends Bloc<CatEvent, CatState> {
   final CatImageRepository catImageRepository;
   final CatFactsRepository catFactRepository;
   final CatFavouritesRepository catFavouritesRepository;
-  final String subId;
+  String subId;
 
   CatBloc({
     required this.catImageRepository,
@@ -17,7 +17,6 @@ class CatBloc extends Bloc<CatEvent, CatState> {
     required this.catFavouritesRepository,
     required this.subId,
   }) : super(CatInitial()) {
-    print('$subId');
     on<FetchCats>((event, emit) async {
       if (event.showLoadingIndicator) {
         emit(CatLoading());
@@ -46,8 +45,10 @@ class CatBloc extends Bloc<CatEvent, CatState> {
 
     on<AddToFavouritesEvent>((event, emit) async {
       try {
-        await catFavouritesRepository.addToFavorites(event.imageId,
-            subId: event.subId);
+        await catFavouritesRepository.addToFavorites(
+          imageId: event.imageId,
+          subId: event.subId,
+        );
 
         final updatedFavourites = await catFavouritesRepository.getFavorites(
           subId: event.subId,
@@ -89,15 +90,18 @@ class CatBloc extends Bloc<CatEvent, CatState> {
         final favourites =
             await catFavouritesRepository.getFavorites(subId: event.subId);
         if (favourites.isEmpty) {
-          emit(CatEmptyFavorites());
-        } else {
           emit(
-            CatLoaded(cats: [], catFacts: [], favourites: favourites),
+            CatEmptyFavorites(),
           );
+        } else {
+          emit(CatLoaded(cats: [], catFacts: [], favourites: favourites));
         }
       } catch (error) {
         emit(CatError());
       }
+    });
+    on<UpdateSubId>((event, emit) {
+      subId = event.subId;
     });
   }
 }

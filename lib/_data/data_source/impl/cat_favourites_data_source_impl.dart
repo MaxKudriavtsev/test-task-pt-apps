@@ -23,7 +23,6 @@ class CatFavoritesDataSourceImpl implements CatFavouritesDataSource {
         'x-api-key': apiKey,
       },
     );
-    print('API Response: ${response.body}');
 
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
@@ -34,8 +33,10 @@ class CatFavoritesDataSourceImpl implements CatFavouritesDataSource {
   }
 
   @override
-  Future<CatFavouriteModel> addToFavorites(String imageId,
-      {String? subId}) async {
+  Future<CatFavouriteModel> addToFavorites({
+    required String imageId,
+    required String subId,
+  }) async {
     final Uri uri = Uri.parse('$baseUrl/favourites');
     final response = await http.post(
       uri,
@@ -45,7 +46,7 @@ class CatFavoritesDataSourceImpl implements CatFavouritesDataSource {
       },
       body: jsonEncode({
         'image_id': imageId,
-        if (subId != null) 'sub_id': subId,
+        'sub_id': subId,
       }),
     );
 

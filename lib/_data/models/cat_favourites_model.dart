@@ -2,16 +2,12 @@ import 'package:test_task_pt_appps/_data/models/cat_image_model.dart';
 
 class CatFavouriteModel {
   final int id;
-  final String imageId;
-  final String? subId;
-  final DateTime createdAt;
-  final CatImageModel image;
+  final String? imageId;
+  final CatImageModel? image;
 
   CatFavouriteModel({
     required this.id,
     required this.imageId,
-    this.subId,
-    required this.createdAt,
     required this.image,
   });
 
@@ -19,9 +15,8 @@ class CatFavouriteModel {
     return CatFavouriteModel(
       id: json['id'],
       imageId: json['image_id'],
-      subId: json['sub_id'],
-      createdAt: DateTime.parse(json['created_at']),
-      image: CatImageModel.fromJson(json['image']),
+      image:
+          json['image'] != null ? CatImageModel.fromJson(json['image']) : null,
     );
   }
 }

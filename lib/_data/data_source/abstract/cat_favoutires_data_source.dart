@@ -5,6 +5,7 @@ abstract class CatFavouritesDataSource {
     required String subId,
     int limit = 20,
   });
-  Future<CatFavouriteModel> addToFavorites(String imageId, {String? subId});
+  Future<CatFavouriteModel> addToFavorites(
+      {required String imageId, required String subId});
   Future<void> removeFromFavorites(int favouriteId);
 }

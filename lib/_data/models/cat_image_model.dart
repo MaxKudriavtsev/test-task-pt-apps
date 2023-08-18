@@ -1,8 +1,8 @@
 class CatImageModel {
   final String id;
   final String url;
-  final int width;
-  final int height;
+  final int? width;
+  final int? height;
 
   CatImageModel({
     required this.id,
